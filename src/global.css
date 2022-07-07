@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply text-brand-500;
+}
+
+.app {
+  background-image: url(/src/assets/sunny-bg.jpg);
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.5s ease-out;
+}
+
+.app.rain {
+  background-image: url(/src/assets/rain-bg.jpg);
+}
+
+main {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 1)
+  );
+}
+
+input {
+  box-shadow: 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow {
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
