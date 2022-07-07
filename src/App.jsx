@@ -12,8 +12,8 @@ export const App = () => {
     await fetch(`${api.base}weather?q=${query}&appid=${api.key}&units=metric `)
       .then(response => response.json())
       .then(data => {
-        if (!data) {
-          alert('City not fund')
+        if (!data.main) {
+          alert(data.message)
           setQuery('')
         } else {
           setWeather(data)
@@ -24,14 +24,22 @@ export const App = () => {
   }
 
   return (
-    <div className="">
-      <main className="flex flex-col min-h-screen app rain p-6">
-        {/* SEARCH */}
+    <div
+      className={
+        typeof weather.main != 'undefined'
+          ? weather.main.temp > 16
+            ? 'warm'
+            : 'cold'
+          : 'warm'
+      }
+    >
+      <main className="flex flex-col min-h-screen  p-6">
+        {/* SEARCH BAR */}
         <div className="flex gap-2 justify-center">
           <input
             type="text"
-            className="rounded appearance-none bg-transparent-500 border-none w-full p-1 outline-none placeholder:italic placeholder:text-transparent-text duration-300 transition-all focus:scale-[1.02] focus:bg-transparent-300"
-            placeholder="Insert city"
+            className="rounded appearance-none bg-transparent-500 border-none text-transparent-text w-full p-1 outline-none placeholder:italic placeholder:text-transparent-text duration-300 transition-all focus:scale-[1.02] focus:bg-transparent-300"
+            placeholder="Insert City"
             value={query}
             onKeyDown={event =>
               event.key == 'Enter' ? handleSearchLocation() : ''
@@ -74,12 +82,19 @@ export const App = () => {
               </div>
             </div>
             <div className="flex flex-col gap-6 items-center text-brand-400 text-shadow">
-              <div className="bg-transparent-500 text-[6rem] py-2 px-4 rounded font-extrabold shadow-md shadow-[rgba(0,0,0, 0.2)]">
-                <div>
-                  {parseInt(weather.main.temp)}°c
-                  <div className="text-lg flex justify-around">
-                    <span>MIN: {parseInt(weather.main.temp_min)}°c</span>
-                    <span>MAX: {parseInt(weather.main.temp_max)}°c</span>
+              <div className="bg-transparent-500 text-[6rem] px-4 rounded font-extrabold shadow-md shadow-[rgba(0,0,0, 0.2)]">
+                <div className="flex flex-col items-center pb-2">
+                  <img
+                    src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                    alt=""
+                  />
+                  <span className="leading-none mb-2">
+                    {' '}
+                    {Math.round(weather.main.temp)}°c
+                  </span>
+                  <div className="text-lg flex gap-4">
+                    <span>MIN: {Math.round(weather.main.temp_min)}°c</span>
+                    <span>MAX: {Math.round(weather.main.temp_max)}°c</span>
                   </div>
                 </div>
               </div>

@@ -13,15 +13,18 @@ body {
   @apply text-brand-500;
 }
 
-.app {
-  background-image: url(/src/assets/sunny-bg.jpg);
+.warm {
+  background-image: url(/src/assets/warm-bg.jpg);
   background-size: cover;
   background-position: bottom;
   transition: 0.5s ease-out;
 }
 
-.app.rain {
-  background-image: url(/src/assets/rain-bg.jpg);
+.cold {
+  background-image: url(/src/assets/cold-bg.jpg);
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.5s ease-out;
 }
 
 main {
