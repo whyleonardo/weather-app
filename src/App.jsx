@@ -18,7 +18,6 @@ export const App = () => {
         } else {
           setWeather(data)
           setQuery('')
-          console.log(data)
         }
       })
   }
